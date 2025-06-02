@@ -1,0 +1,25 @@
+﻿@model entityLayer.concrete.kitaplar
+@{
+    ViewData["Title"] = "düzenleKitap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Kitap Düzenle</h1>
+
+@using (Html.BeginForm("düzenleKitap", "kitaplar", FormMethod.Post))
+{
+    <labal>Kitap Adı</labal>
+    @Html.TextBoxFor(i => i.kitapAdi, new { @class = "form-control" })
+
+    <br />
+    <labal>Yazar</labal>
+    @Html.TextBoxFor(i => i.yazar, new { @class = "form-control" })
+    <br />
+    <labal>Adet</labal>
+    @Html.TextBoxFor(i => i.adet, new { @class = "form-control" })
+    <br />
+    <labal>Sayfa Sayısı</labal>
+    @Html.TextBoxFor(i => i.sayfaSayisi, new { @class = "form-control" })
+    @Html.HiddenFor(i => i.id)
+    <button class="btn btn-primary">Kaydet</button>
+}

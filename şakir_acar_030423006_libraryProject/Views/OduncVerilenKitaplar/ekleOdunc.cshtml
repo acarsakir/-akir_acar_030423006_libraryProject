@@ -1,0 +1,19 @@
+﻿@model entityLayer.concrete.odüncVerilenKitaplar
+@{
+    ViewData["Title"] = "ekleOdunc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ödünç Kitap Ekle</h1>
+
+@using (Html.BeginForm("ekleOdunc", "OduncVerilenKitaplar", FormMethod.Post))
+{
+    <label>Üye Seç</label>
+    @Html.DropDownListFor(x => x.uyeId, ViewBag.uyeList as List<SelectListItem>, "Üye Seçin", new { @class = "form-control" })
+
+    <br />
+
+    @Html.HiddenFor(i => i.kitapId) @* kitapId gerekli çünkü hangi kitap ödünç veriliyor bilinecek *@
+
+    <button class="btn btn-primary">Ekle</button>
+}

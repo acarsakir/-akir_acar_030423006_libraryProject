@@ -1,0 +1,47 @@
+﻿@using entityLayer.concrete
+@model List<uyeler>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Kütüphane Üyeleri</h1>
+
+
+<table class="table table-bordered">
+	<tr>
+		<th> Id</th>
+		<th>Üye Adı</th>
+		<th>Üye Soyadı</th>
+		<th>Üye Telefonu</th>
+		
+
+	</tr>
+
+	<tbody>
+		@foreach (var i in Model)
+		{
+			<tr>
+				<td>@i.id</td>
+				<td>@i.ad </td>
+				<td>@i.soyad</td>
+				<td>@i.telefon</td>
+				
+				<td>
+					<a href="~/Uyeler/silUyeler/@i.id" style=" display: flex; align-items: center" class="btn btn-warning">
+						Üye Sil
+					</a> 
+					<a href="~/Uyeler/düzenleUyeler/@i.id" class="btn btn-success" style=" display: flex; align-items: center; margin-top:5px;">
+						Düzenle
+					</a> 
+					@* <a href="~/borrowedBook/addBorrowedBook?bookId=@i.bookId" class="btn btn-success" style=" display: flex; align-items: center; margin-top:5px;">
+						Lend
+					</a> *@
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<a href="~/Uyeler/ekleUye" class="btn btn-primary">Üye Ekle</a>
+

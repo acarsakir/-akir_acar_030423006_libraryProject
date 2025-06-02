@@ -1,0 +1,29 @@
+﻿@model entityLayer.concrete.uyeler
+@{
+    ViewData["Title"] = "ekleUye";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Kütüphaneye Üye Ekle</h1>
+
+@using (Html.BeginForm("ekleUye", "Uyeler", FormMethod.Post))
+{
+    <label>Üye Adı</label>
+    @Html.TextBoxFor(i => i.ad, new { @class = "form-control" })
+
+    <br />
+    <label>Üye Soyadı</label>
+    @Html.TextBoxFor(i => i.soyad, new { @class = "form-control" })
+
+    <br />
+    <label>Üye Telefonu</label>
+    @Html.TextBoxFor(i => i.telefon, new { @class = "form-control" })
+
+    <br />
+    @Html.HiddenFor(i => i.id)
+
+    <br />
+    <button class="btn btn-primary">Ekle</button>
+}
+
+
