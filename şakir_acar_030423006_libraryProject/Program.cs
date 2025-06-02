@@ -10,6 +10,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Render'ın verdiği portu al
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(int.Parse(port));  // Tüm IP'lerde belirtilen portu dinle
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -18,7 +26,6 @@ builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<appUser, appRole>()
     .AddEntityFrameworkStores<Context>()
     .AddDefaultTokenProviders();
-
 
 builder.Services.AddScoped<IKitaplarDal, EfKitaplarDal>();
 builder.Services.AddScoped<IKitaplarService, kitaplarManager>();
@@ -35,19 +42,11 @@ builder.Services.AddScoped<IUyelerService, uyelerManager>();
 builder.Services.AddScoped<IOduncDal, EfOduncKitaplarDal>();
 builder.Services.AddScoped<IOduncServis, oduncVerilenManager>();
 
-
-
 var app = builder.Build();
 
-
-
-
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
