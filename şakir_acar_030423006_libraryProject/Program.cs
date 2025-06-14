@@ -21,7 +21,10 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<Context>();
+//builder.Services.AddDbContext<Context>();
+builder.Services.AddDbContext<Context>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddIdentity<appUser, appRole>()
     .AddEntityFrameworkStores<Context>()
@@ -35,6 +38,7 @@ builder.Services.AddScoped<IAppUserService, appUserManager>();
 
 builder.Services.AddScoped<IAppRoleDal, EfAppRoleDal>();
 builder.Services.AddScoped<IAppRoleService, appRoleManager>();
+
 
 builder.Services.AddScoped<IUyelerDal, EfUyelerDal>();
 builder.Services.AddScoped<IUyelerService, uyelerManager>();
